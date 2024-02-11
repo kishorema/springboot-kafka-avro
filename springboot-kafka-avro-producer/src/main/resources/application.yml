@@ -1,5 +1,5 @@
 server:
-  port : 8080
+  port: 8080
 spring:
   kafka:
     producer:
@@ -10,7 +10,7 @@ spring:
       group-id: student_group
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-      interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor
+      #interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor
 
 topic:
-    student: sm-poc-avro-student-tp
+  student: sm-poc-avro-student-tp
