@@ -1,9 +1,11 @@
 package org.poc.kafka.consumer;
 
-import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.poc.kafka.avro.model.Student;
+import org.poc.kafka.consumer.database.builder.StudentBuilder;
+import org.poc.kafka.consumer.database.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.DltHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
@@ -16,6 +18,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class StudentConsumer {
+
+  @Autowired private StudentBuilder studentBuilder;
+  @Autowired private StudentRepository studentRepository;
 
   /**
    * if autoCreateTopics is false then create retry and dlt topic manually dlt topic :
@@ -38,7 +43,14 @@ public class StudentConsumer {
     log.info(String.format("#### -> Consumed message -> %s", studentRecord.value()));
     log.info("#### -> Key: {}", studentRecord.key());
     log.info("#### -> FirstName: {}", studentRecord.value().getFirstName());
-    if (Objects.nonNull(ack)) ack.acknowledge();
+    // if (Objects.nonNull(ack)) {
+    org.poc.kafka.consumer.database.Student entity =
+        studentBuilder.mapStudentAvroToEntity(studentRecord.value());
+
+    studentRepository.save(entity);
+    log.info("saved student entity to database");
+    // ack.acknowledge();
+    // }
   }
 
   @DltHandler

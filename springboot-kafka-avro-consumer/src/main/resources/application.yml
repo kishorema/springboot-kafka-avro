@@ -1,6 +1,17 @@
 server:
   port: 8089
 spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/student_db
+    username: postgres
+    password: postgres
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
   kafka:
     consumer:
       properties:
