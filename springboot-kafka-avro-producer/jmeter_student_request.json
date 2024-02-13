@@ -1,0 +1,17 @@
+{
+  "id": "${__UUID()}",
+  "rollNumber": ${__Random(1,50000)},
+  "firstName": "${__RandomString(10,abcdefghijklmnopqrstuvwxyz)}",
+  "lastName": "${__RandomString(10,abcdefghijklmnopqrstuvwxyz)}",
+  "className": "${__RandomString(8,abcdefghijklmnopqrstuvwxyz)}",
+  "contact": {
+    "emailId": "${__RandomString(5,abcdefghijklmnopqrstuvwxyz)}@${__RandomString(5,abcdefghijklmnopqrstuvwxyz)}.com",
+    "mobile": "74${__time(Mddmmsss,)}"
+  },
+  "scores": [
+  {
+    "subject": "${__RandomString(10,abcdefghijklmnopqrstuvwxyz)}",
+    "marks": ${__Random(0,100)}
+  }
+  ]
+}
