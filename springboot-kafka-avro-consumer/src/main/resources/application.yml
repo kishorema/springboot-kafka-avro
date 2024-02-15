@@ -35,3 +35,11 @@ spring:
 
 toipc:
   student: sm-poc-avro-student-tp
+logging:
+  level:
+    com:
+      zaxxer:
+        hikari:
+          HikariConfig: DEBUG
+
+
